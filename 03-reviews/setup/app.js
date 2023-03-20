@@ -29,3 +29,59 @@ const reviews = [
     text: 'Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ',
   },
 ];
+
+// reviews [OBJ] sorted by
+//  id / name / job / img.jpeg / text per IDX
+//     / #author #job #person-img #info
+let currentID = 1;
+editUI(reviews[0]);
+
+// all reviews need to be identified by their id
+
+let prev = document.querySelector('.prev-btn');
+let next = document.querySelector('.next-btn');
+let suprise = document.querySelector('.random-btn');
+next.addEventListener('click', () => {
+  currentID += 1;
+  containID();
+  let review = reviews.find(x => x.id === currentID);
+  editUI(review);
+})
+
+prev.addEventListener('click', () => {
+  currentID -= 1;
+  containID();
+  let review = reviews.find(x => x.id === currentID)
+  editUI(review);
+})
+
+suprise.addEventListener('click', () => {
+  getRandomID();
+  let review = reviews.find(x => x.id === currentID);
+  editUI(review);
+})
+
+function containID(){
+  if (currentID < 1){
+    currentID = reviews.length;
+  } 
+  if (currentID > reviews.length){
+    currentID = 1;
+  }
+}
+
+function editUI(review){
+
+  let img = document.getElementById('person-img');
+  img.src = review.img;
+  let author = document.getElementById('author');
+  author.innerHTML = review.name;
+  let job = document.getElementById('job');
+  job.innerHTML = review.job;
+  let info = document.getElementById('info');
+  info.innerHTML = review.text;
+}
+
+function getRandomID() {
+  currentID = Math.floor(Math.random() * reviews.length) + 1;
+}
