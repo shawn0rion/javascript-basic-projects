@@ -34,9 +34,12 @@ const reviews = [
 //  id / name / job / img.jpeg / text per IDX
 //     / #author #job #person-img #info
 let currentID = 1;
-editUI(reviews[0]);
 
 // all reviews need to be identified by their id
+let img = document.getElementById('person-img');
+let author = document.getElementById('author');
+let job = document.getElementById('job');
+let info = document.getElementById('info');
 
 let prev = document.querySelector('.prev-btn');
 let next = document.querySelector('.next-btn');
@@ -71,17 +74,14 @@ function containID(){
 }
 
 function editUI(review){
-
-  let img = document.getElementById('person-img');
   img.src = review.img;
-  let author = document.getElementById('author');
   author.innerHTML = review.name;
-  let job = document.getElementById('job');
   job.innerHTML = review.job;
-  let info = document.getElementById('info');
   info.innerHTML = review.text;
 }
 
 function getRandomID() {
   currentID = Math.floor(Math.random() * reviews.length) + 1;
 }
+
+editUI(reviews[0]);
