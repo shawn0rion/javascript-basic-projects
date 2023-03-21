@@ -198,11 +198,13 @@ nav {
 .social-icons {
   display: none;
 }
+/* default */
 .links {
-  /* height: 0;
+  height: 0;
   overflow: hidden;
-  transition: var(--transition); */
+  transition: var(--transition); 
 }
+/* if not there then add it. TOGGLE CLASS */
 .show-links {
   height: 10rem;
 }
