@@ -206,6 +206,8 @@ Modal
   background: transparent;
   color: var(--clr-primary-5);
 }
+
+/* parent */
 .modal-overlay {
   position: fixed;
   top: 0;
