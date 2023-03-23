@@ -71,4 +71,77 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "bison steak",
+    category: "dinner",
+    price: 22.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
+
+const sectionCenter = document.querySelector(".section-center");
+const btnContainer = document.querySelector(".btn-container");
+
+// iterate over items
+// check item category, if no button has that category, then appendnewfilter btn
+
+window.addEventListener("DOMContentLoaded", function () {
+  displayMenuItems(menu);
+  displayButtons();
+});
+
+function displayButtons() {
+  const categories = menu.reduce(
+    function (values, item) {
+      if (!values.includes(item.category)) {
+        values.push(item.category);
+      }
+      return values;
+    },
+    ["all"]
+  );
+
+  let displayBtns = categories.map(function (category) {
+    return `<button class="filter-btn" data-id="${category}">${category}</button>`;
+  });
+  displayBtns = displayBtns.join("");
+  btnContainer.innerHTML = displayBtns;
+
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let category = e.currentTarget.dataset.id;
+      let menuCategory = menu.filter(function (menuItem) {
+        return category === menuItem.category;
+      });
+      if (category === "all") {
+        displayMenuItems(menu);
+      } else {
+        displayMenuItems(menuCategory);
+      }
+    });
+  });
+}
+
+function displayMenuItems(menuItems) {
+  let displayMenu = menuItems.map(function (item) {
+    // console.log(item);
+
+    return `<article class="menu-item">
+          <img src=${item.img} alt=${item.title} class="photo" />
+          <div class="item-info">
+            <header>
+              <h4>${item.title}</h4>
+              <h4 class="price">$${item.price}</h4>
+            </header>
+            <p class="item-text">
+              ${item.desc}
+            </p>
+          </div>
+        </article>`;
+  });
+  displayMenu = displayMenu.join("");
+  sectionCenter.innerHTML = displayMenu;
+}
